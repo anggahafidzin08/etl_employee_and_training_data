@@ -89,10 +89,11 @@ To be able accessing data from Google Spreadsheets, one of the secure way is usi
 - Then join those 2 tables by using `query\display_employee_position_history.sql` query to view detail Employee Position History data.
 
 Run this script to process all above step
-```Python
+``` Window Powershell
 python .\task1_basic_data_and_query\task1_main.py
 ```
 result:
+
 ![image](https://github.com/user-attachments/assets/83531bad-f5ee-480a-97ee-302961bd9c05)
 
 
