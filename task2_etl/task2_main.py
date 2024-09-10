@@ -43,4 +43,5 @@ if __name__ == "__main__":
     dmart = employee_df.merge(training_df, how='left', on=['EmpID']).sort_values(by=['EmpID', 'TrainingDate'], ascending=[True, True]).reset_index(drop=True)
     
     report_viz = spreadsheet.worksheet('DMart - Report + Visualizations')
+    report_viz.clear()
     set_with_dataframe(report_viz, dmart)
