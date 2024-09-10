@@ -98,4 +98,18 @@ result:
 
 
 ### Task 2: ETL, Data Warehouse and Analytics Task
-- 
+Here is a simple ETL Pipeline for this task
+
+![WhatsApp Image 2024-09-10 at 1 46 36 PM](https://github.com/user-attachments/assets/b2b59e52-7376-4f0e-95c7-520c6fa139aa)
+
+
+- Connect python to my local database on SQL Server using **PyODBC**.
+- Get `employee_dataset` from my local database.
+  
+  ![image](https://github.com/user-attachments/assets/fadf934a-7567-4479-990f-c8e435de3220)
+  
+- Connect python to Spreadsheet using Google APIs & Services
+- Get `training_development` data from this [Spreadsheet](https://docs.google.com/spreadsheets/d/1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0/edit?gid=1222139431#gid=1222139431&range=A1:I3001).
+- Join those 2 table and transform / cleaning several data to appropriate format.
+- Load it into Google Spreadsheet as a datasources for Looker Studio Dashboard
+- Develop Looker Studio as an [**Employee Training Dashboard**](https://lookerstudio.google.com/reporting/da25f3a4-d158-409d-a357-c26df808a839).
