@@ -36,3 +36,45 @@ For this task, I have to create a data pipeline that will extract and transform 
 In this project I used Kaggle public datasets:
 - [Employee Data](https://www.kaggle.com/datasets/ravindrasinghrana/employeedataset?resource=download&select=employee_data.csv)
 - [Training & Development](https://www.kaggle.com/datasets/ravindrasinghrana/employeedataset?resource=download&select=training_and_development_data.csv)
+
+
+
+## 📌 Getting Started
+### Installing Python Libraries
+There is `requirements.txt` file that contains all python libraries needed for this projects, such as ([PyODBC](https://pypi.org/project/pyodbc/), [GSpread](https://pypi.org/project/gspread/), etc)
+```
+pip install -r requirements.txt
+```
+
+### Prepare SQL Server Credentials
+I have a credential data that allow me to access my local database on SQL Server, I stored it on JSON format:
+```
+{"sql_server":
+    {
+        "DRIVER":"your_driver"
+        , "SERVER":"your_server"
+        , "DATABASE":"your_database"
+        , "USERNAME":"your_username"
+        , "PWD":"your_password"
+    }
+}
+```
+
+### Prepare Google API & Services Credentials
+To be able accessing data from Google Spreadsheets, one of the secure way is using Google APIs & Services, so I create my Service Accounts and enable Google Sheet API then stored the credentials into this JSON format:
+```
+{
+  "type": "",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "angga-xxx@xxx.iam.gserviceaccount.com",
+  "client_id": "",
+  "auth_uri": "",
+  "token_uri": "",
+  "auth_provider_x509_cert_url": "",
+  "client_x509_cert_url": "",
+  "universe_domain": ""
+}
+
+```
