@@ -9,11 +9,11 @@ Here is a simple project to enhance  my knowledges in processing RAW data and de
 - **Author Introduction**
 - **Project Objectives**
 - **Getting Started**
-- **Usages**
+- **Guideline**
 
 
 ## Hi, I'm Angga Hafidzin! 👋
-A Data Analyst in the retail industry, with two years experience. I’ve honed my skills in managing extensive datasets and delivering actionable insights through comprehensive reports and analytical dashboards.
+A Data Analyst with two years experiences in the retail industry. I’ve honed my skills in managing extensive datasets and delivering actionable insights through comprehensive reports and analytical dashboards.
 #### Let's connect! 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anggaph/)
 
@@ -78,3 +78,23 @@ To be able accessing data from Google Spreadsheets, one of the secure way is usi
 }
 
 ```
+
+## Guideline
+### Task 1: Create and Insert data into SQL Server
+- This `task1_basic_data_and_query\task1_main.py` is a python script that will be used to achieved task 1.
+- First I write DDL query to create 2 tables, you can check it on `query\create_employee.sql` and `query\create_position_history.sql`.
+- Connect python to my local database on SQL Server using **PyODBC**
+- Run DDL query with PyODBC connectors and cursors.
+- Run DML query `query\insert_position_data.sql` and `query\insert_employee_data.sql` with PyODBC connectors and cursors.
+- Then join those 2 tables by using `query\display_employee_position_history.sql` query to view detail Employee Position History data.
+
+Run this script to process all above step
+```Python
+python .\task1_basic_data_and_query\task1_main.py
+```
+result:
+![image](https://github.com/user-attachments/assets/83531bad-f5ee-480a-97ee-302961bd9c05)
+
+
+### Task 2: ETL, Data Warehouse and Analytics Task
+- 
