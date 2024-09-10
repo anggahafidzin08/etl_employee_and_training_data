@@ -36,6 +36,7 @@ if __name__ == "__main__":
     employee_df = pd.read_sql_query(emp_dataset, con)
     cur.close()
     con.close()
+    
     employee_df['StartDate'] = pd.to_datetime(employee_df['StartDate'])
     employee_df['ExitDate'] = pd.to_datetime(employee_df['ExitDate'])
     
