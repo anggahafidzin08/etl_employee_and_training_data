@@ -1,0 +1,5 @@
+pyodbc
+sqlparse
+gspread
+oauth2client
+sqlalchemy
