@@ -3,6 +3,8 @@ import config
 import os
 from sqlalchemy.engine import URL
 from sqlalchemy import create_engine
+import json
+import re
 
 if __name__ == "__main__":
     def get_file(file, folder=None):
@@ -18,18 +20,22 @@ if __name__ == "__main__":
     # connect to localhost SQL Server
     con , cur = config.connect_sql_server(json_file_path)
 
-    employee_data = pd.read_csv('task2_dataset/employee_data.csv')
+    employee_data = pd.read_csv('.\\task2_etl\\task2_dataset\\employee_data.csv')
     print(employee_data.head())
+
+    with open(json_file_path, 'r') as f:
+        data = json.load(f)
+
     connection_url = URL.create(
         "mssql+pyodbc",
-        username="",
-        password="",
-        host="localhost\\SQLEXPRESS",
-        port=1433,
-        database="AdventureWorksLT",
+        username=data['sql_server']['USERNAME'],
+        password=data['sql_server']['PWD'],
+        host=data['sql_server']['SERVER'],
+        port=data['sql_server']['PORT'],
+        database=data['sql_server']['DATABASE'],
         query={
-            "driver": "SQL Server",
-            "TrustServerCertificate": "yes",
+            "driver": re.sub('[{}]','', data['sql_server']['DRIVER']),
+            "TrustServerCertificate": data['sql_server']['Trusted_Connection'],
             "authentication": "ActiveDirectoryIntegrated",
         },
     )
