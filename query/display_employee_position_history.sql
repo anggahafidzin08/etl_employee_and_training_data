@@ -21,8 +21,8 @@ select
 	, cp.FullName
 	, cp.BirthDate
 	, cp.Address
-	, cp.PosID
-	, cp.PosTitle
+	, cp.PosID CurrentPositionID
+	, cp.PosTitle CurrentPositionName
 	, cp.StartDate
 	, cp.EndDate
 from current_pos cp
