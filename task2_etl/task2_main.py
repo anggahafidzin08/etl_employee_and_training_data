@@ -42,6 +42,8 @@ if __name__ == "__main__":
     
     dmart = employee_df.merge(training_df, how='left', on=['EmpID']).sort_values(by=['EmpID', 'TrainingDate'], ascending=[True, True]).reset_index(drop=True)
     
+    # get datamart sheet 'DMart - Report + Visualizations'
     report_viz = spreadsheet.worksheet('DMart - Report + Visualizations')
     report_viz.clear()
+    # Load dmart data to report_viz ('DMart - Report + Visualizations')
     set_with_dataframe(report_viz, dmart)

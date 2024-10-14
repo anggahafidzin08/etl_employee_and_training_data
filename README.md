@@ -61,25 +61,56 @@ I have a credential data that allow me to access my local database on SQL Server
 ```
 
 ### Prepare Google API & Services Credentials
-To be able accessing data from Google Spreadsheets, one of the secure way is using Google APIs & Services, so I create my Service Accounts and enable Google Sheet API then stored the credentials into this JSON format:
-```
-{
-  "type": "",
-  "project_id": "",
-  "private_key_id": "",
-  "private_key": "",
-  "client_email": "angga-xxx@xxx.iam.gserviceaccount.com",
-  "client_id": "",
-  "auth_uri": "",
-  "token_uri": "",
-  "auth_provider_x509_cert_url": "",
-  "client_x509_cert_url": "",
-  "universe_domain": ""
-}
+To be able accessing data from Google Spreadsheets, one of the secure way is using Google APIs & Services, these are step by steps to achieve it:
 
-```
+- Select or create new (if doesn't exist) a google project. 
 
-## Guideline
+  [![Google Console Link](  https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://console.cloud.google.com/)
+
+  ![alt text](google-console.png)
+
+- Create and select a project > click **API & Services**.
+
+- Enable API & Services that will be use, in this case I only enabled **Google Sheet API**.
+
+  ![alt text](google-sheets-api.png)
+
+- Create Service Accounts
+
+  ![alt text](google-service-accounts.png)
+
+- Fill all the data needed
+
+  ![alt text](google-create-service-account.png)
+
+- Click sevice account that have been created > click **Keys** > **Create/Add Key** in json format.
+
+  ![alt text](google-service-account-key.png)
+
+- Here are the information inside service account credential/key:
+  ```
+  {
+    "type": "",
+    "project_id": "",
+    "private_key_id": "",
+    "private_key": "",
+    "client_email": "angga-xxx@xxx.iam.gserviceaccount.com",
+    "client_id": "",
+    "auth_uri": "",
+    "token_uri": "",
+    "auth_provider_x509_cert_url": "",
+    "client_x509_cert_url": "",
+    "universe_domain": ""
+  }
+  ```
+- Add Service Account to google spreadsheet access as an editor.
+
+  ![alt text](google-spreadsheet-access.png)
+
+
+
+
+## Project Guideline
 ### Task 1: Create and Insert data into SQL Server
 - This `task1_basic_data_and_query\task1_main.py` is a python script that will be used to achieved task 1.
 - First I write DDL query to create 2 tables, you can check it on `query\create_employee.sql` and `query\create_position_history.sql`.
@@ -109,7 +140,27 @@ Here is a simple ETL Pipeline for this task
   ![image](https://github.com/user-attachments/assets/fadf934a-7567-4479-990f-c8e435de3220)
   
 - Connect python to Spreadsheet using Google APIs & Services
+  ```python
+  # python connect to Google API through service credentials
+  client = config.connect_google_api(creds_google)
+  ```
+
 - Get `training_development` data from this [Spreadsheet](https://docs.google.com/spreadsheets/d/1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0/edit?gid=1222139431#gid=1222139431&range=A1:I3001).
+  ```python
+  spreadsheet = client.open_by_key(
+    '1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0')
+  sheet1 = spreadsheet.worksheet('Sheet 1')
+
+  # get data from Google Spreadsheets
+  training_df = get_as_dataframe(sheet1)
+  ```
 - Join those 2 table and transform / cleaning several data to appropriate format.
 - Load it into Google Spreadsheet as a datasources for Looker Studio Dashboard
+  ```python
+  # get datamart sheet 'DMart - Report + Visualizations'
+    report_viz = spreadsheet.worksheet('DMart - Report + Visualizations')
+    report_viz.clear()
+    # Load dmart data to report_viz ('DMart - Report + Visualizations')
+    set_with_dataframe(report_viz, dmart)
+  ```
 - Develop Looker Studio as an [**Employee Training Dashboard**](https://lookerstudio.google.com/reporting/da25f3a4-d158-409d-a357-c26df808a839).
