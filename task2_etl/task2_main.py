@@ -2,6 +2,7 @@ import pandas as pd
 import sqlparse
 import config
 import os
+import datetime
 from gspread_dataframe import get_as_dataframe, set_with_dataframe
 
 if __name__ == "__main__":
@@ -25,9 +26,11 @@ if __name__ == "__main__":
     # data training = https://docs.google.com/spreadsheets/d/1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0
     spreadsheet = client.open_by_key('1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0')
     sheet1 = spreadsheet.worksheet('Sheet 1')
+    print(f'{datetime.datetime.now()}: Worksheet already specified')
 
     # get data from Google Spreadsheets
     training_df = get_as_dataframe(sheet1)
+    print(f'{datetime.datetime.now()}: Worksheet already extracted')
 
     # connect to SQL Server to get Employee Dataset
     con, cur = config.connect_sql_server(json_file_path)
@@ -36,14 +39,18 @@ if __name__ == "__main__":
     employee_df = pd.read_sql_query(emp_dataset, con)
     cur.close()
     con.close()
+    print(f'{datetime.datetime.now()}: SQL Server data already extracted')
     
     employee_df['StartDate'] = pd.to_datetime(employee_df['StartDate'])
     employee_df['ExitDate'] = pd.to_datetime(employee_df['ExitDate'])
     
     dmart = employee_df.merge(training_df, how='left', on=['EmpID']).sort_values(by=['EmpID', 'TrainingDate'], ascending=[True, True]).reset_index(drop=True)
+    print(f'{datetime.datetime.now()}: Data Mart already consolidated')
     
     # get datamart sheet 'DMart - Report + Visualizations'
     report_viz = spreadsheet.worksheet('DMart - Report + Visualizations')
     report_viz.clear()
+    print(f'{datetime.datetime.now()}: Clear Google Sheets - Worksheet')
     # Load dmart data to report_viz ('DMart - Report + Visualizations')
     set_with_dataframe(report_viz, dmart)
+    print(f'{datetime.datetime.now()}: Load Data Mart into specified Worksheet')
