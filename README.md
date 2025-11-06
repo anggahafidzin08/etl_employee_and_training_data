@@ -148,7 +148,7 @@ Here is a simple ETL Pipeline for this task
 - Get `training_development` data from this [Spreadsheet](https://docs.google.com/spreadsheets/d/1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0/edit?gid=1222139431#gid=1222139431&range=A1:I3001).
   ```python
   spreadsheet = client.open_by_key(
-    '1nfxwUaTRQCVl3QTrBlcfAlQ509X8bXkFlRJdziCdds0')
+    '1nfxwxxxxxxxxxxxxxxxxxxxxxxxx')
   sheet1 = spreadsheet.worksheet('Sheet 1')
 
   # get data from Google Spreadsheets
